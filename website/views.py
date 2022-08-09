@@ -28,8 +28,7 @@ def home():
 def delete_note():
     note = json.loads(request.data)
     noteId = note['noteId']
-    note = Note.query.get(noteId)
-    if note:
+    if note := Note.query.get(noteId):
         if note.user_id == current_user.id:
             db.session.delete(note)
             db.session.commit()
